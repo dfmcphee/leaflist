@@ -1,0 +1,229 @@
+/**
+*  Variables
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/**
+*  Base styles
+*/
+body {
+  background: #eee;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+input[type="text"] {
+  -webkit-appearance: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  line-height: 2;
+  padding: 0 0.5em;
+  margin-right: 0px;
+  border-radius: 0;
+  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/**
+*  Container
+*/
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/**
+*  Toolbar
+*/
+.toolbar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.toolbar input[type="text"] {
+  -webkit-flex: 10;
+  flex: 10;
+  margin: 0;
+}
+.toolbar input[type="text"]:focus {
+  outline: 0;
+  border: 1px solid rgba(189, 73, 50, 0.8);
+  -moz-box-shadow: rgba(189, 73, 50, 0.6) 0px 0px 3px;
+  -webkit-box-shadow: rgba(189, 73, 50, 0.6) 0px 0px 3px;
+  box-shadow: rgba(189, 73, 50, 0.6) 0px 0px 3px;
+}
+.toolbar button {
+  -webkit-flex: 2;
+  flex: 2;
+  height: 36px;
+}
+
+/**
+*  Buttons
+*/
+.button {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  background: #BD4932;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+.button:hover {
+  background: #a9412d;
+  color: white;
+}
+
+/**
+*  Todo list
+*/
+.list {
+  padding: 0;
+}
+.list li {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.list li input[type="text"] {
+  -webkit-flex: 11;
+  flex: 11;
+  height: 35px;
+}
+.list li .checkbox {
+  -webkit-flex: 1;
+  flex: 1;
+}
+.list li button {
+  -webkit-flex: 2;
+  flex: 2;
+  width: 100%;
+}
+
+/**
+*  Custom checkbox
+*/
+input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox {
+  width: 25px;
+  position: relative;
+}
+
+/**
+* Create the box for the checkbox
+*/
+.checkbox label {
+  cursor: pointer;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  top: 0px;
+  left: 0;
+  background: #eee;
+  border: 1px solid #ddd;
+}
+
+/**
+* Display the tick inside the checkbox
+*/
+.checkbox label:after {
+  opacity: 0.2;
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 10px;
+  left: 11px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/**
+* Create the hover event of the tick
+*/
+.checkbox label:hover::after {
+  opacity: 0.5;
+}
+
+/**
+* Create the checkbox state for the tick
+*/
+.checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}

@@ -1,0 +1,19 @@
+/**
+*  Variables
+*/
+$light-gray: #c3c3c3;
+$light-orange: #FFD34E;
+$medium-orange: #DB9E36;
+$dark-orange: #BD4932;
+$green: #105B63;
+$cream: #eee;
+
+@import 'compass/reset';
+@import 'compass/css3';
+
+@import 'base';
+@import 'layout';
+
+@import 'modules/toolbar';
+@import 'modules/buttons';
+@import 'modules/todos';

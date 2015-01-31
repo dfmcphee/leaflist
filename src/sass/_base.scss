@@ -1,0 +1,25 @@
+/**
+*  Base styles
+*/
+body {
+  background: $cream;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+input[type="text"] {
+  -webkit-appearance: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  line-height: 2;
+  padding: 0 0.5em;
+  margin-right: 0px;
+  border-radius: 0;
+  border: 1px solid #ddd;
+  background: rgba(255,255,255, 0.3);
+}

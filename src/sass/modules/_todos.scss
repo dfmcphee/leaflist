@@ -1,0 +1,88 @@
+/**
+*  Todo list
+*/
+.list {
+  padding: 0;
+
+  li {
+    @include display-flex;
+    @include flex-direction(row);
+
+    input[type="text"] {
+      @include flex(11);
+      height: 35px;
+    }
+
+    .checkbox {
+      @include flex(1);
+    }
+
+    button {
+      @include flex(2);
+      width: 100%;
+    }
+  }
+}
+
+/**
+*  Custom checkbox
+*/
+input[type="checkbox"] {
+  display:none;
+}
+
+.checkbox {
+  width: 25px;
+  position: relative;
+}
+
+/**
+* Create the box for the checkbox
+*/
+.checkbox label {
+  cursor: pointer;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  top: 0px;
+  left: 0;
+  background: #eee;
+  border:1px solid #ddd;
+}
+
+/**
+* Display the tick inside the checkbox
+*/
+.checkbox label:after {
+  opacity: 0.2;
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 10px;
+  left: 11px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/**
+* Create the hover event of the tick
+*/
+.checkbox label:hover::after {
+  opacity: 0.5;
+}
+
+/**
+* Create the checkbox state for the tick
+*/
+.checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}

@@ -1,0 +1,25 @@
+/**
+*  Toolbar
+*/
+.toolbar {
+  @include display-flex;
+  @include flex-direction(row);
+
+  margin-bottom: 10px;
+
+  input[type="text"] {
+    @include flex(10);
+    margin: 0;
+  }
+
+  input[type="text"]:focus {
+    outline: 0;
+    border: 1px solid rgba($dark-orange, 0.8);
+    @include box-shadow(rgba($dark-orange, 0.6) 0px 0px 3px);
+  }
+
+  button {
+    @include flex(2);
+    height: 36px;
+  }
+}
