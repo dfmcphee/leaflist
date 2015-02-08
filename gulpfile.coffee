@@ -16,7 +16,7 @@ gulp.task 'server', ->
 gulp.task "sass", ->
   gulp.src("./src/sass/screen.scss").pipe(compass(
     css: "public/css"
-    sass: "public/sass"
+    sass: "src/sass"
   )).pipe gulp.dest("./public/css")
   return
 

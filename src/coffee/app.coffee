@@ -1,11 +1,23 @@
 # On document ready
 $ ->
-  todoList = new List
+  collection = new Collection
+  collection.restore()
 
   # Fetch list of todos
-  todoList.fetch()
+  # Add event listener when add todo button is clicked
+  $('#lists').on "click", "li", ->
+    id = $(this).data('list-id')
+    title = $(this).html()
+    todoList = new List(id, title)
+    todoList.fetch()
+    return
 
-  # Add event listener when add button is clicked
+  # Add event listener when add list button is clicked
+  $(document).on "click", "#add-list", ->
+    collection.create()
+    return
+
+  # Add event listener when add todo button is clicked
   $(document).on "click", "#add-todo", ->
     todoList.create()
     return
@@ -50,7 +62,7 @@ $ ->
     todoList.update(todo)
     $(input).prop('readonly', true)
     setTimeout ( ->
-      $(input).parent().find('button').remove()
+      $(input).parent().find('button').removeTodo()
       return
     ), 100
     return

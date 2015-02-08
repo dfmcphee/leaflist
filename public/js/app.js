@@ -1,7 +1,17 @@
 $(function() {
-  var todoList;
-  todoList = new List;
-  todoList.fetch();
+  var collection;
+  collection = new Collection;
+  collection.restore();
+  $('#lists').on("click", "li", function() {
+    var id, title, todoList;
+    id = $(this).data('list-id');
+    title = $(this).html();
+    todoList = new List(id, title);
+    todoList.fetch();
+  });
+  $(document).on("click", "#add-list", function() {
+    collection.create();
+  });
   $(document).on("click", "#add-todo", function() {
     todoList.create();
   });
@@ -39,7 +49,7 @@ $(function() {
     todoList.update(todo);
     $(input).prop('readonly', true);
     setTimeout((function() {
-      $(input).parent().find('button').remove();
+      $(input).parent().find('button').removeTodo();
     }), 100);
   });
   $('#todo-list').on("keyup", "input[type='text']", function(e) {

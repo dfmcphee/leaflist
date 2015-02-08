@@ -2,7 +2,7 @@
 # List of todos
 #
 class List
-  constructor: (@todos=[]) ->
+  constructor: (@id, @title, @todos=[]) ->
 
   #
   # Creates a new todo
@@ -44,9 +44,30 @@ class List
     return todo
 
   #
+  # Remove a list
+  #
+  remove: ->
+    # Set url for request
+    url = "/lists/remove"
+    id = @id
+
+    # Send ajax POST request
+    $.ajax url,
+      type: "POST"
+      data: JSON.stringify({id: id})
+      contentType: "application/json"
+      success: (data) ->
+        $("#list-" + id).remove()
+        return
+      error: ->
+        # Output error if request fails
+        alert "Something went wrong. Please try again."
+    return
+
+  #
   # Removes a todo
   #
-  remove: (id) ->
+  removeTodo: (id) ->
     # Loop through todos
     for todo in @todos
       # If the id matches
@@ -95,7 +116,7 @@ class List
     self = this
 
     # Set url for request
-    url = "/todos/"
+    url = "/todos/" + @id + "/"
 
     # Send ajax GET request for list of todos
     $.ajax url,
@@ -124,4 +145,21 @@ class List
       # And render each one
       todo.render()
 
+    return
+
+  #
+  # Renders a todo item
+  #
+  render: ->
+    # Create new list item
+    li = $("<li id='list-" + @id + "'></li>")
+
+    # Add the todo id as a data attribute
+    li.attr "data-list-id", @id
+
+    # Add checkbox wrapper to list item
+    li.html @title
+
+    # Add to todo list
+    $("#lists").append li
     return

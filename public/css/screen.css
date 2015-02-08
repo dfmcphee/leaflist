@@ -60,9 +60,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /**
 *  Base styles
 */
+html {
+  height: 100%;
+}
+
 body {
   background: #eee;
   font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
 h1 {
@@ -87,8 +92,37 @@ input[type="text"] {
 *  Container
 */
 .container {
-  max-width: 600px;
+  max-width: 1024px;
+  height: 100%;
   margin: 0 auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+.sidebar {
+  -webkit-flex: 3;
+  flex: 3;
+}
+
+.main {
+  -webkit-flex: 9;
+  flex: 9;
+}
+
+.main {
+  padding: 20px;
+}
+
+.sidebar {
+  background: #4b4b4b;
+  padding: 3em;
+  color: white;
+}
+.sidebar h2 {
+  font-size: 1.4em;
+  margin-bottom: 1em;
 }
 
 /**

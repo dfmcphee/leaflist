@@ -1,7 +1,9 @@
 var List;
 
 List = (function() {
-  function List(todos) {
+  function List(id, title, todos) {
+    this.id = id;
+    this.title = title;
     this.todos = todos != null ? todos : [];
   }
 
@@ -33,7 +35,26 @@ List = (function() {
     return todo;
   };
 
-  List.prototype.remove = function(id) {
+  List.prototype.remove = function() {
+    var id, url;
+    url = "/lists/remove";
+    id = this.id;
+    $.ajax(url, {
+      type: "POST",
+      data: JSON.stringify({
+        id: id
+      }),
+      contentType: "application/json",
+      success: function(data) {
+        $("#list-" + id).remove();
+      },
+      error: function() {
+        return alert("Something went wrong. Please try again.");
+      }
+    });
+  };
+
+  List.prototype.removeTodo = function(id) {
     var todo, _i, _len, _ref;
     _ref = this.todos;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -77,7 +98,7 @@ List = (function() {
   List.prototype.fetch = function() {
     var self, url;
     self = this;
-    url = "/todos/";
+    url = "/todos/" + this.id + "/";
     $.ajax(url, {
       type: "GET",
       contentType: "application/json",
@@ -103,6 +124,14 @@ List = (function() {
       todo = _ref[_i];
       todo.render();
     }
+  };
+
+  List.prototype.render = function() {
+    var li;
+    li = $("<li id='list-" + this.id + "'></li>");
+    li.attr("data-list-id", this.id);
+    li.html(this.title);
+    $("#lists").append(li);
   };
 
   return List;
