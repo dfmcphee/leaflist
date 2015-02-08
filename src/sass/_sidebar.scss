@@ -1,5 +1,5 @@
 .sidebar {
-    background: #4b4b4b;
+    background: $dark-gray;
     padding: 3em;
     color: white;
 
@@ -7,4 +7,35 @@
       font-size: 1.4em;
       margin-bottom: 1em;
     }
+}
+
+#lists {
+  li {
+    padding: 1em;
+    cursor: pointer;
+  }
+
+  li.selected {
+    background: darken($dark-gray, 10%);
+  }
+
+  .title {
+    @include flex(9);
+    vertical-align:middle;
+    line-height: 2em;
+  }
+
+  .remove {
+    @include flex(3);
+  }
+}
+
+.left-background {
+  background-color: $dark-gray;
+  width: 25%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

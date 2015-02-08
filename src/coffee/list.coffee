@@ -19,7 +19,7 @@ class List
     # Send ajax POST request
     $.ajax url,
       type: "POST"
-      data: JSON.stringify({content: content})
+      data: JSON.stringify({content: content, listId: @id})
       contentType: "application/json"
       success: (data) ->
         self.add(data).render()
@@ -36,7 +36,7 @@ class List
   #
   add: (data) ->
     # Initialize a new Todo
-    todo = new Todo(data._id, data.content, data.complete)
+    todo = new Todo(data._id, data.content, data.complete, @id)
 
     # Add it to the todos
     @todos.push(todo)
@@ -158,7 +158,8 @@ class List
     li.attr "data-list-id", @id
 
     # Add checkbox wrapper to list item
-    li.html @title
+    li.html('<span class="title">' + @title + '</span>')
+    li.append('<button class="button remove hidden">Delete</button>')
 
     # Add to todo list
     $("#lists").append li

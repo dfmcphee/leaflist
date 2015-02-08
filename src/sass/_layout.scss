@@ -11,9 +11,9 @@
 }
 
 .sidebar {
-  @include flex(3);
+  @include flex(4);
 }
 
 .main {
-  @include flex(9);
+  @include flex(8);
 }

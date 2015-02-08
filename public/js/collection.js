@@ -35,13 +35,15 @@ Collection = (function() {
   };
 
   Collection.prototype.remove = function(id) {
-    var list, _i, _len, _ref;
+    var list, self, _i, _len, _ref;
+    self = this;
     _ref = this.lists;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       list = _ref[_i];
       if (list.id === id) {
         list.remove();
         this.lists.splice(this.lists.indexOf(list), 1);
+        self.save();
         return true;
       }
     }
@@ -49,7 +51,7 @@ Collection = (function() {
   };
 
   Collection.prototype.save = function() {
-    var cookie, data, list, listData, _i, _len, _ref;
+    var data, list, listData, _i, _len, _ref;
     listData = [];
     _ref = this.lists;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -60,19 +62,18 @@ Collection = (function() {
       };
       listData.push(data);
     }
-    cookie = ['todoLists', '=', JSON.stringify(listData), '; domain=.', window.location.host.toString(), '; path=/;'].join('');
-    document.cookie = cookie;
+    $.cookie('todoLists', listData);
   };
 
   Collection.prototype.restore = function() {
-    var data, list, result, results, _i, _len;
-    results = document.cookie.match(new RegExp('todoLists=([^;]+)'));
-    results && (result = JSON.parse(results[1]));
+    var data, list, results, self, _i, _len;
+    self = this;
+    results = $.cookie('todoLists');
     if (results) {
       for (_i = 0, _len = results.length; _i < _len; _i++) {
         list = results[_i];
         data = {
-          id: list.id,
+          _id: list.id,
           title: list.title
         };
         self.add(data).render();

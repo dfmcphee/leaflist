@@ -15,7 +15,8 @@ List = (function() {
     $.ajax(url, {
       type: "POST",
       data: JSON.stringify({
-        content: content
+        content: content,
+        listId: this.id
       }),
       contentType: "application/json",
       success: function(data) {
@@ -30,7 +31,7 @@ List = (function() {
 
   List.prototype.add = function(data) {
     var todo;
-    todo = new Todo(data._id, data.content, data.complete);
+    todo = new Todo(data._id, data.content, data.complete, this.id);
     this.todos.push(todo);
     return todo;
   };
@@ -130,7 +131,8 @@ List = (function() {
     var li;
     li = $("<li id='list-" + this.id + "'></li>");
     li.attr("data-list-id", this.id);
-    li.html(this.title);
+    li.html('<span class="title">' + this.title + '</span>');
+    li.append('<button class="button remove hidden">Delete</button>');
     $("#lists").append(li);
   };
 

@@ -69,6 +69,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
+body .hidden {
+  display: none;
+}
 
 h1 {
   font-size: 1.8em;
@@ -102,13 +105,13 @@ input[type="text"] {
 }
 
 .sidebar {
-  -webkit-flex: 3;
-  flex: 3;
+  -webkit-flex: 4;
+  flex: 4;
 }
 
 .main {
-  -webkit-flex: 9;
-  flex: 9;
+  -webkit-flex: 8;
+  flex: 8;
 }
 
 .main {
@@ -123,6 +126,34 @@ input[type="text"] {
 .sidebar h2 {
   font-size: 1.4em;
   margin-bottom: 1em;
+}
+
+#lists li {
+  padding: 1em;
+  cursor: pointer;
+}
+#lists li.selected {
+  background: #323232;
+}
+#lists .title {
+  -webkit-flex: 9;
+  flex: 9;
+  vertical-align: middle;
+  line-height: 2em;
+}
+#lists .remove {
+  -webkit-flex: 3;
+  flex: 3;
+}
+
+.left-background {
+  background-color: #4b4b4b;
+  width: 25%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 /**

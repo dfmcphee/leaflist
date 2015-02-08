@@ -1,22 +1,37 @@
 $(function() {
-  var collection;
+  var collection, todoList;
+  $.cookie.json = true;
+  todoList = false;
   collection = new Collection;
   collection.restore();
   $('#lists').on("click", "li", function() {
-    var id, title, todoList;
+    var id, title;
     id = $(this).data('list-id');
     title = $(this).html();
     todoList = new List(id, title);
     todoList.fetch();
+    $('#lists li').removeClass('selected');
+    $(this).addClass('selected');
+    $('.main h1').html(title);
+    $('.main .toolbar').removeClass('hidden');
+    $('.remove').addClass('hidden');
+    $(this).find('.remove').removeClass('hidden');
   });
   $(document).on("click", "#add-list", function() {
     collection.create();
   });
+  $('#new-list').keypress(function(e) {
+    if (e.which === 13) {
+      return collection.create();
+    }
+  });
   $(document).on("click", "#add-todo", function() {
-    todoList.create();
+    if (todoList) {
+      todoList.create();
+    }
   });
   $('#new-todo').keypress(function(e) {
-    if (e.which === 13) {
+    if (e.which === 13 && todoList) {
       return todoList.create();
     }
   });
@@ -67,9 +82,14 @@ $(function() {
       return $(input).parent().find('button').remove();
     }
   });
-  return $('#todo-list').on("click", "button", function(e) {
+  $('#todo-list').on("click", "button", function(e) {
     var id;
     id = $(this).closest('li').data("todo-id");
-    todoList.remove(id);
+    todoList.removeTodo(id);
+  });
+  return $('#lists').on("click", ".remove", function(e) {
+    var id;
+    id = $(this).closest('li').data("list-id");
+    collection.remove(id);
   });
 });

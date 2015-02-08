@@ -5,33 +5,6 @@ class Todo
   constructor: (@id, @content, @complete, @listId) ->
 
   #
-  # Creates a new todo
-  #
-  create: (listId) ->
-    self = this
-
-    # Get todo content from input
-    content = $("#new-todo").val()
-
-    # Set url for request
-    url = "/todos/create"
-
-    # Send ajax POST request
-    $.ajax url,
-      type: "POST"
-      data: JSON.stringify({content: content, listId})
-      contentType: "application/json"
-      success: (data) ->
-        self.add(data).render()
-
-        # Reset the input content
-        $('#new-todo').val ""
-      error: ->
-        # Output error if request fails
-        alert "Something went wrong. Please try again."
-    return
-
-  #
   # Renders a todo item
   #
   render: ->

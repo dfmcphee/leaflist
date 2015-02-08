@@ -9,6 +9,10 @@ body {
   background: $cream;
   font-family: 'Open Sans', sans-serif;
   height: 100%;
+
+  .hidden {
+    display:none;
+  }
 }
 
 h1 {

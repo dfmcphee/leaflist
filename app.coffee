@@ -97,6 +97,9 @@ app.post "/todos/remove", (req, res) ->
 app.post "/lists/remove", (req, res) ->
   # Make sure request includes id and a todo exists with that id
   if typeof (req.body.id) isnt "undefined"
+    Todos.remove
+      listId: req.body.id
+    , {}
     TodoLists.remove
       _id: req.body.id
     , {}

@@ -48,6 +48,7 @@ class Collection
   # Removes a list
   #
   remove: (id) ->
+    self = this
     # Loop through lists
     for list in @lists
       # If the id matches
@@ -55,6 +56,7 @@ class Collection
         # Remove from the collection
         list.remove()
         @lists.splice(@lists.indexOf(list), 1)
+        self.save()
         return true
 
     return false
@@ -70,21 +72,19 @@ class Collection
         id: list.id
         title: list.title
       listData.push(data)
-    cookie = ['todoLists', '=', JSON.stringify(listData), '; domain=.', window.location.host.toString(), '; path=/;'].join('')
-    document.cookie = cookie
-
+    $.cookie('todoLists', listData)
     return
 
   #
   # Restore collection from cookie
   #
   restore: () ->
-    results = document.cookie.match(new RegExp('todoLists=([^;]+)'))
-    results && (result = JSON.parse(results[1]))
+    self = this
+    results = $.cookie('todoLists')
     if results
       for list in results
         data =
-          id: list.id
+          _id: list.id
           title: list.title
         self.add(data).render()
     return

@@ -1,5 +1,7 @@
 # On document ready
 $ ->
+  $.cookie.json = true
+  todoList = false
   collection = new Collection
   collection.restore()
 
@@ -10,6 +12,12 @@ $ ->
     title = $(this).html()
     todoList = new List(id, title)
     todoList.fetch()
+    $('#lists li').removeClass('selected')
+    $(this).addClass('selected')
+    $('.main h1').html(title)
+    $('.main .toolbar').removeClass('hidden')
+    $('.remove').addClass('hidden')
+    $(this).find('.remove').removeClass('hidden')
     return
 
   # Add event listener when add list button is clicked
@@ -17,14 +25,20 @@ $ ->
     collection.create()
     return
 
+  # Add event listener when enter key is pressed
+  $('#new-list').keypress (e) ->
+    if (e.which == 13)
+      collection.create()
+
   # Add event listener when add todo button is clicked
   $(document).on "click", "#add-todo", ->
-    todoList.create()
+    if (todoList)
+      todoList.create()
     return
 
   # Add event listener when enter key is pressed
   $('#new-todo').keypress (e) ->
-    if (e.which == 13)
+    if (e.which == 13 && todoList)
       todoList.create()
 
   # Add event listener when chekbox is checked/unchecked
@@ -88,5 +102,11 @@ $ ->
   # Add event when todo delete is clicked
   $('#todo-list').on "click", "button", (e) ->
     id = $(this).closest('li').data("todo-id")
-    todoList.remove(id)
+    todoList.removeTodo(id)
+    return
+
+  # Add event when list delete is clicked
+  $('#lists').on "click", ".remove", (e) ->
+    id = $(this).closest('li').data("list-id")
+    collection.remove(id)
     return
