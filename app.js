@@ -4,6 +4,8 @@ express = require("express");
 
 app = express();
 
+app.set('port', process.env.PORT || 3000);
+
 mongoose = require('mongoose');
 
 Schema = mongoose.Schema;
@@ -114,6 +116,6 @@ app.post("/lists/remove", function(req, res) {
   return res.send(req.body.id);
 });
 
-app.listen(3000);
-
-console.log("Server running at http://localhost:3000");
+app.listen(app.get('port'), function() {
+  return console.log("Node app is running at localhost:" + app.get('port'));
+});
