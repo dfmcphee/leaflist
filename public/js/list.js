@@ -2,26 +2,27 @@ var List;
 
 List = (function() {
   function List(id, title, todos) {
-    this.id = id;
-    this.title = title;
+    this.id = id != null ? id : null;
+    this.title = title != null ? title : '';
     this.todos = todos != null ? todos : [];
   }
 
   List.prototype.create = function() {
-    var content, self, url;
+    var self, title, url;
     self = this;
-    content = $("#new-todo").val();
-    url = "/todos/create";
+    title = $("#new-list").val();
+    url = "/list/create";
     $.ajax(url, {
       type: "POST",
       data: JSON.stringify({
-        content: content,
-        listId: this.id
+        title: title
       }),
       contentType: "application/json",
       success: function(data) {
-        self.add(data).render();
-        return $('#new-todo').val("");
+        $('#new-list').val("");
+        self.id = data._id;
+        self.title = data.title;
+        return self.render();
       },
       error: function() {
         return alert("Something went wrong. Please try again.");
@@ -29,11 +30,8 @@ List = (function() {
     });
   };
 
-  List.prototype.add = function(data) {
-    var todo;
-    todo = new Todo(data._id, data.content, data.complete, this.id);
-    this.todos.push(todo);
-    return todo;
+  List.prototype.add = function(todo) {
+    return this.todos.push(todo);
   };
 
   List.prototype.remove = function() {
@@ -86,7 +84,7 @@ List = (function() {
     _ref = this.todos;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       todo = _ref[_i];
-      if (todo.id === updatedTodo._id) {
+      if (todo.id === updatedTodo.id) {
         todo.complete = updatedTodo.complete;
         todo.content = updatedTodo.content;
         todo.publish();
@@ -104,12 +102,14 @@ List = (function() {
       type: "GET",
       contentType: "application/json",
       success: function(data) {
-        var todo, _i, _len;
-        for (_i = 0, _len = data.length; _i < _len; _i++) {
-          todo = data[_i];
+        var todo, _i, _len, _ref;
+        self.title = data.list.title;
+        _ref = data.todos;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          todo = _ref[_i];
           self.todos.push(new Todo(todo._id, todo.content, todo.complete));
         }
-        return self.list();
+        return self.render();
       },
       error: function() {
         return alert("Something went wrong. Please try again.");
@@ -117,23 +117,22 @@ List = (function() {
     });
   };
 
-  List.prototype.list = function() {
-    var todo, _i, _len, _ref;
+  List.prototype.render = function() {
+    var todo, uri, _i, _len, _ref;
+    $('#title').html(this.title);
     $('#todo-list').empty();
     _ref = this.todos;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       todo = _ref[_i];
       todo.render();
     }
-  };
-
-  List.prototype.render = function() {
-    var li;
-    li = $("<li id='list-" + this.id + "'></li>");
-    li.attr("data-list-id", this.id);
-    li.html('<span class="title">' + this.title + '</span>');
-    li.append('<button class="button remove hidden">Delete</button>');
-    $("#lists").append(li);
+    $('#create-list').addClass('hidden');
+    $('#create-todo').removeClass('hidden');
+    uri = new URI(window.location.href);
+    uri.setQuery("list", this.id);
+    window.history.pushState({
+      list: this.id
+    }, this.title, uri.toString());
   };
 
   return List;

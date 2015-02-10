@@ -21,15 +21,22 @@ gulp.task "sass", ->
   return
 
 
-# Compile coffeescript
-gulp.task "coffee", ->
+# Compile clientcoffeescript
+gulp.task "coffee-client", ->
   gulp.src("./src/coffee/*.coffee")
   .pipe(coffee(bare: true))
   .pipe gulp.dest("./public/js/")
   return
 
+# Compile server coffeescript
+gulp.task "coffee-server", ->
+  gulp.src("./app.coffee")
+  .pipe(coffee(bare: true))
+  .pipe gulp.dest("./")
+  return
+
 # Compile tests
-gulp.task "test-coffee", ->
+gulp.task "coffee-test", ->
   gulp.src("./src/test/*.coffee")
   .pipe(coffee(bare: true))
   .pipe gulp.dest("./public/test/")
@@ -38,8 +45,9 @@ gulp.task "test-coffee", ->
 # Run tasks when a file changes
 gulp.task "watch", ->
   gulp.watch "./src/sass/**/*.scss", ["sass"]
-  gulp.watch "./src/coffee/**/*.coffee", ["coffee"]
-  gulp.watch "./src/test/**/*.coffee", ["test-coffee"]
+  gulp.watch "./src/coffee/**/*.coffee", ["coffee-client"]
+  gulp.watch "./app.coffee", ["coffee-server"]
+  gulp.watch "./src/test/**/*.coffee", ["coffee-test"]
   return
 
 

@@ -95,65 +95,30 @@ input[type="text"] {
 *  Container
 */
 .container {
-  max-width: 1024px;
+  max-width: 680px;
   height: 100%;
   margin: 0 auto;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
 }
 
-.sidebar {
-  -webkit-flex: 4;
-  flex: 4;
-}
-
-.main {
-  -webkit-flex: 8;
-  flex: 8;
-}
-
-.main {
+.navbar {
   padding: 20px;
-}
-
-.sidebar {
   background: #4b4b4b;
-  padding: 3em;
-  color: white;
 }
-.sidebar h2 {
-  font-size: 1.4em;
-  margin-bottom: 1em;
+.navbar ul {
+  overflow: hidden;
+  max-width: 680px;
+  margin: 0 auto;
 }
-
-#lists li {
-  padding: 1em;
-  cursor: pointer;
+.navbar .nav-left {
+  float: left;
 }
-#lists li.selected {
-  background: #323232;
+.navbar .nav-right {
+  float: right;
+  margin-top: 3.8em;
 }
-#lists .title {
-  -webkit-flex: 9;
-  flex: 9;
-  vertical-align: middle;
-  line-height: 2em;
-}
-#lists .remove {
-  -webkit-flex: 3;
-  flex: 3;
-}
-
-.left-background {
-  background-color: #4b4b4b;
-  width: 25%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
+.navbar li a {
+  color: #eee;
+  text-decoration: none;
 }
 
 /**
@@ -202,33 +167,6 @@ input[type="text"] {
 .button:hover {
   background: #a9412d;
   color: white;
-}
-
-/**
-*  Todo list
-*/
-.list {
-  padding: 0;
-}
-.list li {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-}
-.list li input[type="text"] {
-  -webkit-flex: 11;
-  flex: 11;
-  height: 35px;
-}
-.list li .checkbox {
-  -webkit-flex: 1;
-  flex: 1;
-}
-.list li button {
-  -webkit-flex: 2;
-  flex: 2;
-  width: 100%;
 }
 
 /**
@@ -291,4 +229,31 @@ input[type="checkbox"] {
 */
 .checkbox input[type=checkbox]:checked + label:after {
   opacity: 1;
+}
+
+/**
+*  List
+*/
+.list {
+  padding: 0;
+}
+.list li {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.list li input[type="text"] {
+  -webkit-flex: 11;
+  flex: 11;
+  height: 35px;
+}
+.list li .checkbox {
+  -webkit-flex: 1;
+  flex: 1;
+}
+.list li button {
+  -webkit-flex: 2;
+  flex: 2;
+  width: 100%;
 }

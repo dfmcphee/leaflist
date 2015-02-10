@@ -1,0 +1,25 @@
+/**
+*  List
+*/
+.list {
+  padding: 0;
+
+  li {
+    @include display-flex;
+    @include flex-direction(row);
+
+    input[type="text"] {
+      @include flex(11);
+      height: 35px;
+    }
+
+    .checkbox {
+      @include flex(1);
+    }
+
+    button {
+      @include flex(2);
+      width: 100%;
+    }
+  }
+}

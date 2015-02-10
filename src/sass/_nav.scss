@@ -1,0 +1,26 @@
+.navbar {
+  padding: 20px;
+  background: $dark-gray;
+
+  ul {
+    overflow: hidden;
+    max-width: $max-width;
+    margin: 0 auto;
+  }
+
+  .nav-left {
+    float: left;
+  }
+
+  .nav-right {
+    float: right;
+    margin-top: 3.8em;
+  }
+
+  li {
+    a {
+      color: #eee;
+      text-decoration: none;
+    }
+  }
+}

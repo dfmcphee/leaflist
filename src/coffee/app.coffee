@@ -1,45 +1,39 @@
 # On document ready
 $ ->
-  $.cookie.json = true
   todoList = false
-  collection = new Collection
-  collection.restore()
 
-  # Fetch list of todos
-  # Add event listener when add todo button is clicked
-  $('#lists').on "click", "li", ->
-    id = $(this).data('list-id')
-    title = $(this).html()
-    todoList = new List(id, title)
+  uri = new URI(window.location.href)
+  params = uri.search(true)
+
+  # If a list is passed in the url, load it
+  if (params && params.list)
+    todoList = new List(params.list)
     todoList.fetch()
-    $('#lists li').removeClass('selected')
-    $(this).addClass('selected')
-    $('.main h1').html(title)
-    $('.main .toolbar').removeClass('hidden')
-    $('.remove').addClass('hidden')
-    $(this).find('.remove').removeClass('hidden')
-    return
+  else
+    $('#create-list').removeClass('hidden')
 
   # Add event listener when add list button is clicked
   $(document).on "click", "#add-list", ->
-    collection.create()
+    todoList = new List()
+    todoList.create()
     return
 
   # Add event listener when enter key is pressed
   $('#new-list').keypress (e) ->
     if (e.which == 13)
-      collection.create()
+      todoList = new List()
+      todoList.create()
 
   # Add event listener when add todo button is clicked
   $(document).on "click", "#add-todo", ->
     if (todoList)
-      todoList.create()
+      new Todo().create(todoList)
     return
 
   # Add event listener when enter key is pressed
   $('#new-todo').keypress (e) ->
     if (e.which == 13 && todoList)
-      todoList.create()
+      new Todo().create(todoList)
 
   # Add event listener when chekbox is checked/unchecked
   $('#todo-list').on "click", "input[type='checkbox']", (e) ->
@@ -68,7 +62,7 @@ $ ->
     id = $(input).closest('li').data("todo-id")
 
     todo =
-      _id: id
+      id: id
       complete: $('#todo-complete-' + id).checked
       content: $(input).val()
 
@@ -76,7 +70,7 @@ $ ->
     todoList.update(todo)
     $(input).prop('readonly', true)
     setTimeout ( ->
-      $(input).parent().find('button').removeTodo()
+      $(input).parent().find('button').remove()
       return
     ), 100
     return
@@ -103,10 +97,4 @@ $ ->
   $('#todo-list').on "click", "button", (e) ->
     id = $(this).closest('li').data("todo-id")
     todoList.removeTodo(id)
-    return
-
-  # Add event when list delete is clicked
-  $('#lists').on "click", ".remove", (e) ->
-    id = $(this).closest('li').data("list-id")
-    collection.remove(id)
     return

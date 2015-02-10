@@ -2,18 +2,7 @@
 *  Container
 */
 .container {
-  max-width: 1024px;
+  max-width: $max-width;
   height: 100%;
   margin: 0 auto;
-
-  @include display-flex;
-  @include flex-direction(row);
-}
-
-.sidebar {
-  @include flex(4);
-}
-
-.main {
-  @include flex(8);
 }

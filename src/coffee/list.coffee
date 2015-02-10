@@ -2,30 +2,35 @@
 # List of todos
 #
 class List
-  constructor: (@id, @title, @todos=[]) ->
+  constructor: (@id = null, @title = '', @todos = []) ->
 
   #
-  # Creates a new todo
+  # Creates a new list
   #
   create: ->
     self = this
 
-    # Get todo content from input
-    content = $("#new-todo").val()
+    # Get list title from input
+    title = $("#new-list").val()
 
     # Set url for request
-    url = "/todos/create"
+    url = "/list/create"
 
     # Send ajax POST request
     $.ajax url,
       type: "POST"
-      data: JSON.stringify({content: content, listId: @id})
+      data: JSON.stringify({title: title})
       contentType: "application/json"
       success: (data) ->
-        self.add(data).render()
-
         # Reset the input content
-        $('#new-todo').val ""
+        $('#new-list').val ""
+
+        # Save the attributes
+        self.id = data._id
+        self.title = data.title
+
+        # Render the new list
+        self.render()
       error: ->
         # Output error if request fails
         alert "Something went wrong. Please try again."
@@ -34,14 +39,9 @@ class List
   #
   # Adds a new todo
   #
-  add: (data) ->
-    # Initialize a new Todo
-    todo = new Todo(data._id, data.content, data.complete, @id)
-
+  add: (todo) ->
     # Add it to the todos
     @todos.push(todo)
-
-    return todo
 
   #
   # Remove a list
@@ -99,7 +99,7 @@ class List
     # Loop through todos
     for todo in @todos
       # If the id matches
-      if todo.id == updatedTodo._id
+      if todo.id == updatedTodo.id
         # Update it
         todo.complete = updatedTodo.complete
         todo.content = updatedTodo.content
@@ -123,21 +123,26 @@ class List
       type: "GET"
       contentType: "application/json"
       success: (data) ->
+        self.title = data.list.title
+
         # Add fetched todos to todos
-        for todo in data
+        for todo in data.todos
           self.todos.push new Todo(todo._id, todo.content, todo.complete)
 
         # Render todos todos
-        self.list()
+        self.render()
       error: ->
         # Output error if request fails
         alert "Something went wrong. Please try again."
     return
 
   #
-  # Render list of todos
+  # Renders the list
   #
-  list: ->
+  render: ->
+    # Set title
+    $('#title').html(@title);
+
     # Remove any exisiting list elements
     $('#todo-list').empty()
     # Loop through todos of todos
@@ -145,22 +150,12 @@ class List
       # And render each one
       todo.render()
 
-    return
+    # Toggle toolbars
+    $('#create-list').addClass('hidden')
+    $('#create-todo').removeClass('hidden')
 
-  #
-  # Renders a todo item
-  #
-  render: ->
-    # Create new list item
-    li = $("<li id='list-" + @id + "'></li>")
-
-    # Add the todo id as a data attribute
-    li.attr "data-list-id", @id
-
-    # Add checkbox wrapper to list item
-    li.html('<span class="title">' + @title + '</span>')
-    li.append('<button class="button remove hidden">Delete</button>')
-
-    # Add to todo list
-    $("#lists").append li
+    # Push state
+    uri = new URI(window.location.href)
+    uri.setQuery("list", @id);
+    window.history.pushState({list: @id}, @title, uri.toString());
     return

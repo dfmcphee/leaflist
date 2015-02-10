@@ -1,38 +1,32 @@
 $(function() {
-  var collection, todoList;
-  $.cookie.json = true;
+  var params, todoList, uri;
   todoList = false;
-  collection = new Collection;
-  collection.restore();
-  $('#lists').on("click", "li", function() {
-    var id, title;
-    id = $(this).data('list-id');
-    title = $(this).html();
-    todoList = new List(id, title);
+  uri = new URI(window.location.href);
+  params = uri.search(true);
+  if (params && params.list) {
+    todoList = new List(params.list);
     todoList.fetch();
-    $('#lists li').removeClass('selected');
-    $(this).addClass('selected');
-    $('.main h1').html(title);
-    $('.main .toolbar').removeClass('hidden');
-    $('.remove').addClass('hidden');
-    $(this).find('.remove').removeClass('hidden');
-  });
+  } else {
+    $('#create-list').removeClass('hidden');
+  }
   $(document).on("click", "#add-list", function() {
-    collection.create();
+    todoList = new List();
+    todoList.create();
   });
   $('#new-list').keypress(function(e) {
     if (e.which === 13) {
-      return collection.create();
+      todoList = new List();
+      return todoList.create();
     }
   });
   $(document).on("click", "#add-todo", function() {
     if (todoList) {
-      todoList.create();
+      new Todo().create(todoList);
     }
   });
   $('#new-todo').keypress(function(e) {
     if (e.which === 13 && todoList) {
-      return todoList.create();
+      return new Todo().create(todoList);
     }
   });
   $('#todo-list').on("click", "input[type='checkbox']", function(e) {
@@ -57,14 +51,14 @@ $(function() {
     input = e.target;
     id = $(input).closest('li').data("todo-id");
     todo = {
-      _id: id,
+      id: id,
       complete: $('#todo-complete-' + id).checked,
       content: $(input).val()
     };
     todoList.update(todo);
     $(input).prop('readonly', true);
     setTimeout((function() {
-      $(input).parent().find('button').removeTodo();
+      $(input).parent().find('button').remove();
     }), 100);
   });
   $('#todo-list').on("keyup", "input[type='text']", function(e) {
@@ -82,14 +76,9 @@ $(function() {
       return $(input).parent().find('button').remove();
     }
   });
-  $('#todo-list').on("click", "button", function(e) {
+  return $('#todo-list').on("click", "button", function(e) {
     var id;
     id = $(this).closest('li').data("todo-id");
     todoList.removeTodo(id);
-  });
-  return $('#lists').on("click", ".remove", function(e) {
-    var id;
-    id = $(this).closest('li').data("list-id");
-    collection.remove(id);
   });
 });

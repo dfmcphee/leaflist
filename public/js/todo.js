@@ -8,6 +8,33 @@ Todo = (function() {
     this.listId = listId;
   }
 
+  Todo.prototype.create = function(list) {
+    var content, self, url;
+    self = this;
+    content = $("#new-todo").val();
+    url = "/todos/create";
+    $.ajax(url, {
+      type: "POST",
+      data: JSON.stringify({
+        content: content,
+        listId: list.id
+      }),
+      contentType: "application/json",
+      success: function(data) {
+        self.id = data._id;
+        self.content = data.content;
+        self.complete = data.complete;
+        self.listId = data.listId;
+        list.add(data);
+        self.render();
+        return $('#new-todo').val("");
+      },
+      error: function() {
+        return alert("Something went wrong. Please try again.");
+      }
+    });
+  };
+
   Todo.prototype.render = function() {
     var checkbox, checkbox_wrapper, input, li;
     li = $("<li id='todo-" + this.id + "'></li>");
