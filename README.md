@@ -1,8 +1,9 @@
-# todos
-A very simple todo list including both client and server code. Built using Express.js, CoffeeScript, and Sass.
+# LeafList
+A very simple way to share todo lists. Includes both client and server. Built using Express.js, MongoDB, CoffeeScript, and Sass.
 
 ## Getting Started
-Install [node.js](http://nodejs.org)
+Install [Node.js](http://nodejs.org)
+Install [MongoDB](http://docs.mongodb.org/manual/installation/)
 
 Open a command prompt in the todos-coffee directory
 

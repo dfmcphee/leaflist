@@ -1,10 +1,11 @@
 # Initialize express
-express = require("express")
+express = require('express')
 app = express()
 app.set('port', (process.env.PORT || 3000))
+app.set('mongouri', (process.env.MONGOLAB_URI || 'mongodb://localhost:27017/leaflist'))
 
 # Mongo connection
-mongoose = require( 'mongoose' )
+mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 List = new Schema(
@@ -20,7 +21,7 @@ Todo = new Schema(
 
 Todo = mongoose.model('Todo', Todo)
 List = mongoose.model('List', List)
-mongoose.connect(process.env.MONGOLAB_URI)
+mongoose.connect(app.get('mongouri'))
 
 # Allow parsing incoming json data
 bodyParser = require("body-parser")
