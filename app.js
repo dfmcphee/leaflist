@@ -101,7 +101,7 @@ app.post("/todos/remove", function(req, res) {
   if (typeof req.body.id !== "undefined") {
     Todo.remove({
       _id: req.body.id
-    }, {});
+    }).exec();
   }
   return res.send(req.body.id);
 });
@@ -110,10 +110,10 @@ app.post("/lists/remove", function(req, res) {
   if (typeof req.body.id !== "undefined") {
     Todo.remove({
       listId: req.body.id
-    }, {});
+    }).exec();
     List.remove({
       _id: req.body.id
-    }, {});
+    }).exec();
   }
   return res.send(req.body.id);
 });

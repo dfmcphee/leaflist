@@ -97,9 +97,7 @@ app.post "/todos/update", (req, res) ->
 app.post "/todos/remove", (req, res) ->
   # Make sure request includes id and a todo exists with that id
   if typeof (req.body.id) isnt "undefined"
-    Todo.remove
-      _id: req.body.id
-    , {}
+    Todo.remove(_id: req.body.id).exec()
   res.send req.body.id
 
 #
@@ -108,12 +106,8 @@ app.post "/todos/remove", (req, res) ->
 app.post "/lists/remove", (req, res) ->
   # Make sure request includes id and a todo exists with that id
   if typeof (req.body.id) isnt "undefined"
-    Todo.remove
-      listId: req.body.id
-    , {}
-    List.remove
-      _id: req.body.id
-    , {}
+    Todo.remove(listId: req.body.id).exec()
+    List.remove(_id: req.body.id).exec()
   res.send req.body.id
 
 
