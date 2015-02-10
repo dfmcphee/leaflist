@@ -2,7 +2,7 @@
   "name": "LeafList",
   "description": "A simple way to share task lists.",
   "repository": "https://github.com/dfmcphee/leaflist",
-  "logo": "https://leaflist.herokuapp.com/logo.svg",
+  "logo": "https://leaflist.herokuapp.com/img/logo.svg",
   "website": "https://leaflist.herokuapp.com",
   "keywords": [
     "node",
@@ -13,6 +13,6 @@
     "list"
   ],
   "addons": [
-    "mongolab:shared-single-small"
+    "mongolab:sandbox"
   ]
 }
