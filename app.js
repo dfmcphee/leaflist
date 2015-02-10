@@ -1,10 +1,12 @@
 var List, Schema, Todo, app, bodyParser, express, mongoose;
 
-express = require("express");
+express = require('express');
 
 app = express();
 
 app.set('port', process.env.PORT || 3000);
+
+app.set('mongouri', process.env.MONGOLAB_URI || 'mongodb://localhost:27017/leaflist');
 
 mongoose = require('mongoose');
 
@@ -25,7 +27,7 @@ Todo = mongoose.model('Todo', Todo);
 
 List = mongoose.model('List', List);
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(app.get('mongouri'));
 
 bodyParser = require("body-parser");
 

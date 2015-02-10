@@ -1,14 +1,10 @@
 /**
 *  Base styles
 */
-html {
-  height: 100%;
-}
 
 body {
   background: $cream;
   font-family: 'Open Sans', sans-serif;
-  height: 100%;
 
   .hidden {
     display:none;
@@ -31,4 +27,8 @@ input[type="text"] {
   border-radius: 0;
   border: 1px solid #ddd;
   background: rgba(255,255,255, 0.3);
+}
+
+img {
+  max-width: 100%;
 }

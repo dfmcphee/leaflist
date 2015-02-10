@@ -8,19 +8,37 @@
     margin: 0 auto;
   }
 
+  .brand {
+    max-width: 150px;
+    overflow:hidden;
+    display:block;
+  }
+
   .nav-left {
     float: left;
   }
 
   .nav-right {
     float: right;
-    margin-top: 3.8em;
+    margin-top: 2em;
   }
 
   li {
     a {
       color: #eee;
       text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .navbar {
+    .brand {
+      max-width: 100px;
+    }
+
+    .nav-right {
+      margin-top: 1em;
     }
   }
 }
