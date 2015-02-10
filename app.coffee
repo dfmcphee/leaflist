@@ -1,6 +1,7 @@
 # Initialize express
 express = require("express")
 app = express()
+app.set('port', (process.env.PORT || 3000))
 
 # Mongo connection
 mongoose = require( 'mongoose' )
@@ -116,5 +117,5 @@ app.post "/lists/remove", (req, res) ->
 
 
 # Open port for server
-app.listen 3000
-console.log "Server running at http://localhost:3000"
+app.listen app.get('port'), ->
+  console.log "Server running at http://localhost:" + app.get('port')
