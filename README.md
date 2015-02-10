@@ -3,6 +3,7 @@ A very simple way to share todo lists. Includes both client and server. Built us
 
 ## Getting Started
 Install [Node.js](http://nodejs.org)
+
 Install [MongoDB](http://docs.mongodb.org/manual/installation/)
 
 Open a command prompt in the todos-coffee directory
