@@ -1,17 +1,20 @@
 {
-  "name": "todo-example",
+  "name": "leaflist",
   "version": "0.0.1",
-  "description": "An example todo server",
+  "description": "A simple way to share lists of tasks.",
   "main": "app.js",
   "keywords": [
-    "example",
-    "tutorial",
+    "list",
+    "sharing",
     "todo",
     "node",
     "js"
   ],
   "author": "Dominic McPhee",
   "license": "MIT",
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
     "body-parser": "~1.10.1",
     "coffee-script": "~1.8.0",
