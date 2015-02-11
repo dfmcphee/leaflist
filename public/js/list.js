@@ -120,6 +120,7 @@ List = (function() {
   List.prototype.render = function() {
     var todo, uri, _i, _len, _ref;
     $('#title').html(this.title);
+    document.title = this.title;
     $('#todo-list').empty();
     _ref = this.todos;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

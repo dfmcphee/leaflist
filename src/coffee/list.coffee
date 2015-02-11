@@ -141,7 +141,8 @@ class List
   #
   render: ->
     # Set title
-    $('#title').html(@title);
+    $('#title').html(@title)
+    document.title = @title
 
     # Remove any exisiting list elements
     $('#todo-list').empty()
