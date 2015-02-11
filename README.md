@@ -6,7 +6,7 @@ Install [Node.js](http://nodejs.org)
 
 Install [MongoDB](http://docs.mongodb.org/manual/installation/)
 
-Open a command prompt in the todos-coffee directory
+Open a command prompt in the leaflist directory
 
 Run `npm install`
 
