@@ -85,7 +85,22 @@ List = (function() {
     return false;
   };
 
-  List.prototype.update = function(updatedTodo) {
+  List.prototype.update = function(title) {
+    var list, url;
+    this.title = title;
+    url = "/lists/update";
+    list = {
+      id: this.id,
+      title: title
+    };
+    return $.ajax(url, {
+      type: "POST",
+      data: JSON.stringify(list),
+      contentType: "application/json"
+    });
+  };
+
+  List.prototype.updateTodo = function(updatedTodo) {
     var todo, _i, _len, _ref;
     _ref = this.todos;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

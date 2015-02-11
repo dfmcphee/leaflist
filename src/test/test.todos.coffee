@@ -38,7 +38,7 @@ describe "Library Tests", ->
       id: "1"
       content: "updated todo"
       complete: true
-    response = list.update(update)
+    response = list.updateTodo(update)
 
     result = list.findById("1")
 

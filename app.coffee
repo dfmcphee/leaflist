@@ -71,7 +71,7 @@ app.post "/todos/create", (req, res) ->
   )
 
 #
-# Complete a todo
+# Update a todo
 #
 app.post "/todos/update", (req, res) ->
   # Make sure request includes id
@@ -98,6 +98,24 @@ app.post "/todos/remove", (req, res) ->
   # Make sure request includes id and a todo exists with that id
   if typeof (req.body.id) isnt "undefined"
     Todo.remove(_id: req.body.id).exec()
+  res.send req.body.id
+
+#
+# Update a list
+#
+app.post "/lists/update", (req, res) ->
+  # Make sure request includes id
+  if typeof (req.body.id) isnt "undefined"
+    update = {}
+    # Update title
+    if typeof (req.body.title) isnt "undefined"
+      update.title = req.body.title
+
+    List.update(
+      _id: req.body.id
+    , $set:
+        update
+    ).exec()
   res.send req.body.id
 
 #

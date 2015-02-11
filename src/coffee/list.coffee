@@ -100,9 +100,28 @@ class List
     return false
 
   #
+  # Updates list
+  #
+  update: (title) ->
+    @title = title
+    
+    # Set url for request
+    url = "/lists/update"
+
+    list =
+      id: @id
+      title: title
+
+    # Open and send the request
+    $.ajax url,
+      type: "POST"
+      data: JSON.stringify(list)
+      contentType: "application/json"
+
+  #
   # Updates a todo
   #
-  update: (updatedTodo) ->
+  updateTodo: (updatedTodo) ->
     # Loop through todos
     for todo in @todos
       # If the id matches

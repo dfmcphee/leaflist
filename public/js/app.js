@@ -11,6 +11,32 @@ $(function() {
     $('#create-list').removeClass('hidden');
   }
   $('#main').addClass('animated fadeIn');
+  $(document).on("click", "#title", function() {
+    if (todoList) {
+      $('#title').addClass('hidden');
+      $('#list-title').removeClass('hidden');
+      $('#list-title').val($('#title').text());
+      $('#list-title').focus();
+    }
+  });
+  $(document).on("blur", "#list-title", function() {
+    var newTitle;
+    newTitle = $('#list-title').val();
+    todoList.update(newTitle);
+    $('#title').html(newTitle);
+    $('#title').removeClass('hidden');
+    $('#list-title').addClass('hidden');
+  });
+  $(document).on('keyup', '#list-title', function(e) {
+    var newTitle;
+    if (e.which === 13) {
+      newTitle = $('#list-title').val();
+      todoList.update(newTitle);
+      $('#title').html(newTitle);
+      $('#title').removeClass('hidden');
+      return $('#list-title').addClass('hidden');
+    }
+  });
   $(document).on("click", "#add-list", function() {
     todoList = new List();
     todoList.create();
@@ -38,7 +64,7 @@ $(function() {
       id: $(checkbox).closest('li').data("todo-id"),
       complete: checkbox.checked
     };
-    todoList.update(todo);
+    todoList.updateTodo(todo);
   });
   $('#todo-list').on("click", "input[type='text']", function(e) {
     var button, ro;
@@ -62,7 +88,7 @@ $(function() {
       complete: $('#todo-complete-' + id).checked,
       content: $(input).val()
     };
-    todoList.update(todo);
+    todoList.updateTodo(todo);
     $(input).prop('readonly', true);
     button = $(input).parent().find('.remove');
     button.addClass('animated bounceOutRight');
@@ -80,7 +106,7 @@ $(function() {
         complete: $('#todo-complete-' + id).checked,
         content: $(input).val()
       };
-      todoList.update(todo);
+      todoList.updateTodo(todo);
       $(input).prop('readonly', true);
       return $(input).parent().find('button').remove();
     }

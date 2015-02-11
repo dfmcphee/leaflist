@@ -15,6 +15,33 @@ $ ->
 
   $('#main').addClass('animated fadeIn')
 
+  # Add event listener when title is clicked
+  $(document).on "click", "#title", ->
+    if (todoList)
+      $('#title').addClass('hidden')
+      $('#list-title').removeClass('hidden')
+      $('#list-title').val($('#title').text())
+      $('#list-title').focus()
+    return
+
+  # Add event listener when title input is blurred
+  $(document).on "blur", "#list-title", ->
+    newTitle = $('#list-title').val()
+    todoList.update(newTitle)
+    $('#title').html(newTitle)
+    $('#title').removeClass('hidden')
+    $('#list-title').addClass('hidden')
+    return
+
+  # Add event listener when enter key is pressed while editing
+  $(document).on 'keyup', '#list-title', (e) ->
+    if (e.which == 13)
+      newTitle = $('#list-title').val()
+      todoList.update(newTitle)
+      $('#title').html(newTitle)
+      $('#title').removeClass('hidden')
+      $('#list-title').addClass('hidden')
+
   # Add event listener when add list button is clicked
   $(document).on "click", "#add-list", ->
     todoList = new List()
@@ -48,7 +75,7 @@ $ ->
       complete: checkbox.checked
 
     # Update todo
-    todoList.update(todo)
+    todoList.updateTodo(todo)
     return
 
   # Add event listener when text input is clicked
@@ -75,7 +102,7 @@ $ ->
       content: $(input).val()
 
     # Update todo
-    todoList.update(todo)
+    todoList.updateTodo(todo)
     $(input).prop('readonly', true)
     button = $(input).parent().find('.remove')
     button.addClass('animated bounceOutRight')
@@ -98,7 +125,7 @@ $ ->
         content: $(input).val()
 
       # Update todo
-      todoList.update(todo)
+      todoList.updateTodo(todo)
       $(input).prop('readonly', true)
       $(input).parent().find('button').remove()
 

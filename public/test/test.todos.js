@@ -36,7 +36,7 @@ describe("Library Tests", function() {
       content: "updated todo",
       complete: true
     };
-    response = list.update(update);
+    response = list.updateTodo(update);
     result = list.findById("1");
     assert(response === true);
     assert(result.content === "updated todo");

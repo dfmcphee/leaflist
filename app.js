@@ -106,6 +106,22 @@ app.post("/todos/remove", function(req, res) {
   return res.send(req.body.id);
 });
 
+app.post("/lists/update", function(req, res) {
+  var update;
+  if (typeof req.body.id !== "undefined") {
+    update = {};
+    if (typeof req.body.title !== "undefined") {
+      update.title = req.body.title;
+    }
+    List.update({
+      _id: req.body.id
+    }, {
+      $set: update
+    }).exec();
+  }
+  return res.send(req.body.id);
+});
+
 app.post("/lists/remove", function(req, res) {
   if (typeof req.body.id !== "undefined") {
     Todo.remove({
