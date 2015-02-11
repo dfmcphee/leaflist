@@ -32,3 +32,19 @@ input[type="text"] {
 img {
   max-width: 100%;
 }
+
+#main {
+  visibility: hidden;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  animation-delay: 0.25s;
+  -webkit-animation-delay: 0.25s;
+  -moz-animation-delay: 0.25s;
+  -ms-animation-delay: 0.25s;
+}
+
+.animated {
+  visibility: visible !important;
+}

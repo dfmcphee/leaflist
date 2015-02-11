@@ -42,19 +42,19 @@ class Todo
   #
   render: ->
     # Create new list item
-    li = $("<li id='todo-" + @id + "'></li>")
+    li = $('<li id="todo-"' + @id + '"></li>')
 
     # Add the todo id as a data attribute
     li.attr "data-todo-id", @id
 
     # Add todo content to readonly text input
-    input = $("<input type='text' class='todo-content' readonly />")
+    input = $('<input type="text" class="todo-content" readonly />')
     input.val @content
     li.append input
 
     # Create checkbox input
     checkbox_wrapper = $("<div class='checkbox'>")
-    checkbox = $("<input type='checkbox' id='todo-complete-" + @id + "' />")
+    checkbox = $('<input type="checkbox" id="todo-complete-' + @id + '" />')
 
     # Set checkbox checked
     checkbox.prop "checked", @complete
@@ -63,10 +63,14 @@ class Todo
     checkbox_wrapper.append checkbox
 
     # Add label to wrapper
-    checkbox_wrapper.append "<label for='todo-complete-" + @id + "'></label>"
+    checkbox_wrapper.append '<label for="todo-complete-' + @id + '"></label>'
 
     # Add checkbox wrapper to list item
     li.append checkbox_wrapper
+
+    # Add remove button
+    button = $('<button class="button remove">Delete</button>')
+    li.append button
 
     # Add to todo list
     $("#todo-list").append li

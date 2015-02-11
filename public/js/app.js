@@ -1,6 +1,7 @@
 $(function() {
   var params, todoList, uri;
   todoList = false;
+  FastClick.attach(document.body);
   uri = new URI(window.location.href);
   params = uri.search(true);
   if (params && params.list) {
@@ -9,6 +10,7 @@ $(function() {
   } else {
     $('#create-list').removeClass('hidden');
   }
+  $('#main').addClass('animated fadeIn');
   $(document).on("click", "#add-list", function() {
     todoList = new List();
     todoList.create();
@@ -39,11 +41,16 @@ $(function() {
     todoList.update(todo);
   });
   $('#todo-list').on("click", "input[type='text']", function(e) {
-    var ro;
+    var button, ro;
     ro = $(this).prop('readonly');
     if (ro) {
-      $(this).prop('readonly', !ro).focus();
-      $(this).parent().append('<button class="button remove">Delete</button>');
+      $(this).prop('readonly', false);
+      button = $(this).parent().find('.remove');
+      button.addClass('animated bounceInRight');
+      button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        return button.removeClass('bounceInRight');
+      });
+      $(this).focus();
     }
   });
   $('#todo-list').on("blur", "input[type='text']", function(e) {
@@ -58,8 +65,13 @@ $(function() {
     todoList.update(todo);
     $(input).prop('readonly', true);
     setTimeout((function() {
-      $(input).parent().find('button').remove();
-    }), 100);
+      var button;
+      button = $(input).parent().find('.remove');
+      button.addClass('animated bounceOutRight');
+      button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        return button.removeClass('animated bounceOutRight');
+      });
+    }), 200);
   });
   $('#todo-list').on("keyup", "input[type='text']", function(e) {
     var id, input, todo;

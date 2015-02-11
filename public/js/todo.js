@@ -36,18 +36,20 @@ Todo = (function() {
   };
 
   Todo.prototype.render = function() {
-    var checkbox, checkbox_wrapper, input, li;
-    li = $("<li id='todo-" + this.id + "'></li>");
+    var button, checkbox, checkbox_wrapper, input, li;
+    li = $('<li id="todo-"' + this.id + '"></li>');
     li.attr("data-todo-id", this.id);
-    input = $("<input type='text' class='todo-content' readonly />");
+    input = $('<input type="text" class="todo-content" readonly />');
     input.val(this.content);
     li.append(input);
     checkbox_wrapper = $("<div class='checkbox'>");
-    checkbox = $("<input type='checkbox' id='todo-complete-" + this.id + "' />");
+    checkbox = $('<input type="checkbox" id="todo-complete-' + this.id + '" />');
     checkbox.prop("checked", this.complete);
     checkbox_wrapper.append(checkbox);
-    checkbox_wrapper.append("<label for='todo-complete-" + this.id + "'></label>");
+    checkbox_wrapper.append('<label for="todo-complete-' + this.id + '"></label>');
     li.append(checkbox_wrapper);
+    button = $('<button class="button remove">Delete</button>');
+    li.append(button);
     $("#todo-list").append(li);
   };
 

@@ -1,6 +1,7 @@
 # On document ready
 $ ->
   todoList = false
+  FastClick.attach(document.body)
 
   uri = new URI(window.location.href)
   params = uri.search(true)
@@ -11,6 +12,8 @@ $ ->
     todoList.fetch()
   else
     $('#create-list').removeClass('hidden')
+
+  $('#main').addClass('animated fadeIn')
 
   # Add event listener when add list button is clicked
   $(document).on "click", "#add-list", ->
@@ -48,12 +51,17 @@ $ ->
     todoList.update(todo)
     return
 
-  # Add event listener when text input is double clicked
+  # Add event listener when text input is clicked
   $('#todo-list').on "click", "input[type='text']", (e) ->
     ro = $(this).prop('readonly')
     if ro
-      $(this).prop('readonly', !ro).focus()
-      $(this).parent().append('<button class="button remove">Delete</button>')
+      $(this).prop('readonly', false)
+      button = $(this).parent().find('.remove')
+      button.addClass('animated bounceInRight')
+      button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
+        button.removeClass('bounceInRight')
+      )
+      $(this).focus()
     return
 
   # Add event when todo input is blurred
@@ -70,9 +78,13 @@ $ ->
     todoList.update(todo)
     $(input).prop('readonly', true)
     setTimeout ( ->
-      $(input).parent().find('button').remove()
+      button = $(input).parent().find('.remove')
+      button.addClass('animated bounceOutRight')
+      button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
+        button.removeClass('animated bounceOutRight')
+      )
       return
-    ), 100
+    ), 200
     return
 
   # Add event listener when enter key is pressed while editing

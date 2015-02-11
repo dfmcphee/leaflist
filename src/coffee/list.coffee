@@ -29,8 +29,15 @@ class List
         self.id = data._id
         self.title = data.title
 
-        # Render the new list
-        self.render()
+        # Hide list creation
+        main = $('#main')
+        main.removeClass('fadeIn').addClass('fadeOut')
+        main.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
+          main.removeClass('fadeOut')
+
+          # Render the new list
+          self.render()
+        )
       error: ->
         # Output error if request fails
         alert "Something went wrong. Please try again."
@@ -155,6 +162,12 @@ class List
     $('#create-list').addClass('hidden')
     $('#create-todo').removeClass('hidden')
     $('.nav-right').removeClass('hidden')
+
+    main = $('#main')
+    main.addClass('animated fadeIn')
+    main.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
+      main.removeClass('fadeIn')
+    )
 
     # Push state
     uri = new URI(window.location.href)

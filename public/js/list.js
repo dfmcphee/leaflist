@@ -19,10 +19,16 @@ List = (function() {
       }),
       contentType: "application/json",
       success: function(data) {
+        var main;
         $('#new-list').val("");
         self.id = data._id;
         self.title = data.title;
-        return self.render();
+        main = $('#main');
+        main.removeClass('fadeIn').addClass('fadeOut');
+        return main.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+          main.removeClass('fadeOut');
+          return self.render();
+        });
       },
       error: function() {
         return alert("Something went wrong. Please try again.");
@@ -118,7 +124,7 @@ List = (function() {
   };
 
   List.prototype.render = function() {
-    var todo, uri, _i, _len, _ref;
+    var main, todo, uri, _i, _len, _ref;
     $('#title').html(this.title);
     document.title = this.title;
     $('#todo-list').empty();
@@ -130,6 +136,11 @@ List = (function() {
     $('#create-list').addClass('hidden');
     $('#create-todo').removeClass('hidden');
     $('.nav-right').removeClass('hidden');
+    main = $('#main');
+    main.addClass('animated fadeIn');
+    main.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+      return main.removeClass('fadeIn');
+    });
     uri = new URI(window.location.href);
     uri.setQuery("list", this.id);
     window.history.pushState({
