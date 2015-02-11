@@ -128,6 +128,7 @@ List = (function() {
     }
     $('#create-list').addClass('hidden');
     $('#create-todo').removeClass('hidden');
+    $('.nav-right').removeClass('hidden');
     uri = new URI(window.location.href);
     uri.setQuery("list", this.id);
     window.history.pushState({

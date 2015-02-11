@@ -14,8 +14,8 @@
 
   input[type="text"]:focus {
     outline: 0;
-    border: 1px solid rgba($dark-orange, 0.8);
-    @include box-shadow(rgba($dark-orange, 0.6) 0px 0px 3px);
+    border: 1px solid rgba($green, 0.8);
+    @include box-shadow(rgba($green, 0.6) 0px 0px 3px);
   }
 
   button {

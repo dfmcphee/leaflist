@@ -13,13 +13,35 @@
       height: 35px;
     }
 
-    .checkbox {
-      @include flex(2);
+    input[type="text"]:focus {
+      outline: 0;
+      border: 1px solid rgba($green, 0.8);
+      @include box-shadow(rgba($green, 0.6) 0px 0px 3px);
     }
 
-    button {
+    .checkbox {
+      @include flex(1);
+    }
+
+    button.remove {
       @include flex(2);
       width: 100%;
+      background: $dark-orange;
+    }
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .list {
+    li {
+      .checkbox {
+        @include flex(2);
+      }
+
+      button {
+        @include flex(2);
+        width: 100%;
+      }
     }
   }
 }

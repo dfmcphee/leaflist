@@ -153,6 +153,7 @@ class List
     # Toggle toolbars
     $('#create-list').addClass('hidden')
     $('#create-todo').removeClass('hidden')
+    $('.nav-right').removeClass('hidden')
 
     # Push state
     uri = new URI(window.location.href)

@@ -48,7 +48,7 @@ class Todo
     li.attr "data-todo-id", @id
 
     # Add todo content to readonly text input
-    input = $("<input type='text' readonly />")
+    input = $("<input type='text' class='todo-content' readonly />")
     input.val @content
     li.append input
 

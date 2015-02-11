@@ -39,7 +39,7 @@ Todo = (function() {
     var checkbox, checkbox_wrapper, input, li;
     li = $("<li id='todo-" + this.id + "'></li>");
     li.attr("data-todo-id", this.id);
-    input = $("<input type='text' readonly />");
+    input = $("<input type='text' class='todo-content' readonly />");
     input.val(this.content);
     li.append(input);
     checkbox_wrapper = $("<div class='checkbox'>");

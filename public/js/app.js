@@ -38,12 +38,12 @@ $(function() {
     };
     todoList.update(todo);
   });
-  $('#todo-list').on("dblclick", "input[type='text']", function(e) {
+  $('#todo-list').on("click", "input[type='text']", function(e) {
     var ro;
     ro = $(this).prop('readonly');
     if (ro) {
       $(this).prop('readonly', !ro).focus();
-      $(this).parent().append('<button class="button">Delete</button>');
+      $(this).parent().append('<button class="button remove">Delete</button>');
     }
   });
   $('#todo-list').on("blur", "input[type='text']", function(e) {
