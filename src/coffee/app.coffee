@@ -77,14 +77,11 @@ $ ->
     # Update todo
     todoList.update(todo)
     $(input).prop('readonly', true)
-    setTimeout ( ->
-      button = $(input).parent().find('.remove')
-      button.addClass('animated bounceOutRight')
-      button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
-        button.removeClass('animated bounceOutRight')
-      )
-      return
-    ), 200
+    button = $(input).parent().find('.remove')
+    button.addClass('animated bounceOutRight')
+    button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
+      button.removeClass('animated bounceOutRight')
+    )
     return
 
   # Add event listener when enter key is pressed while editing

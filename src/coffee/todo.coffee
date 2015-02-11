@@ -27,7 +27,7 @@ class Todo
         self.complete = data.complete
         self.listId = data.listId
 
-        list.add(data)
+        list.add(self)
         self.render()
 
         # Reset the input content
@@ -42,7 +42,7 @@ class Todo
   #
   render: ->
     # Create new list item
-    li = $('<li id="todo-"' + @id + '"></li>')
+    li = $('<li id="todo-' + @id + '"></li>')
 
     # Add the todo id as a data attribute
     li.attr "data-todo-id", @id

@@ -298,8 +298,8 @@ input[type="checkbox"] {
   flex: 1;
 }
 .list li .remove {
-  -webkit-flex: 2;
-  flex: 2;
+  -webkit-flex: 0;
+  flex: 0;
   background: #BD4932;
   visibility: hidden;
   animation-duration: 0.75s;
@@ -310,6 +310,10 @@ input[type="checkbox"] {
   -webkit-animation-delay: 0.25s;
   -moz-animation-delay: 0.25s;
   -ms-animation-delay: 0.25s;
+}
+.list li .remove.animated {
+  -webkit-flex: 2;
+  flex: 2;
 }
 
 @media (max-width: 600px) {

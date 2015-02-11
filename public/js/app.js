@@ -54,7 +54,7 @@ $(function() {
     }
   });
   $('#todo-list').on("blur", "input[type='text']", function(e) {
-    var id, input, todo;
+    var button, id, input, todo;
     input = e.target;
     id = $(input).closest('li').data("todo-id");
     todo = {
@@ -64,14 +64,11 @@ $(function() {
     };
     todoList.update(todo);
     $(input).prop('readonly', true);
-    setTimeout((function() {
-      var button;
-      button = $(input).parent().find('.remove');
-      button.addClass('animated bounceOutRight');
-      button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        return button.removeClass('animated bounceOutRight');
-      });
-    }), 200);
+    button = $(input).parent().find('.remove');
+    button.addClass('animated bounceOutRight');
+    button.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+      return button.removeClass('animated bounceOutRight');
+    });
   });
   $('#todo-list').on("keyup", "input[type='text']", function(e) {
     var id, input, todo;

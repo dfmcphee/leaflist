@@ -25,7 +25,7 @@ Todo = (function() {
         self.content = data.content;
         self.complete = data.complete;
         self.listId = data.listId;
-        list.add(data);
+        list.add(self);
         self.render();
         return $('#new-todo').val("");
       },
@@ -37,7 +37,7 @@ Todo = (function() {
 
   Todo.prototype.render = function() {
     var button, checkbox, checkbox_wrapper, input, li;
-    li = $('<li id="todo-"' + this.id + '"></li>');
+    li = $('<li id="todo-' + this.id + '"></li>');
     li.attr("data-todo-id", this.id);
     input = $('<input type="text" class="todo-content" readonly />');
     input.val(this.content);

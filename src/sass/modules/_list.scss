@@ -24,7 +24,7 @@
     }
 
     .remove {
-      @include flex(2);
+      @include flex(0);
       background: $dark-orange;
       visibility: hidden;
 
@@ -36,6 +36,10 @@
       -webkit-animation-delay: 0.25s;
       -moz-animation-delay: 0.25s;
       -ms-animation-delay: 0.25s;
+    }
+
+    .remove.animated {
+      @include flex(2);
     }
   }
 }
