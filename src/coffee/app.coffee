@@ -29,6 +29,7 @@ $ ->
     newTitle = $('#list-title').val()
     todoList.update(newTitle)
     $('#title').html(newTitle)
+    document.title = newTitle
     $('#title').removeClass('hidden')
     $('#list-title').addClass('hidden')
     return
@@ -39,6 +40,7 @@ $ ->
       newTitle = $('#list-title').val()
       todoList.update(newTitle)
       $('#title').html(newTitle)
+      document.title = newTitle
       $('#title').removeClass('hidden')
       $('#list-title').addClass('hidden')
 

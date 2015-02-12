@@ -24,6 +24,7 @@ $(function() {
     newTitle = $('#list-title').val();
     todoList.update(newTitle);
     $('#title').html(newTitle);
+    document.title = newTitle;
     $('#title').removeClass('hidden');
     $('#list-title').addClass('hidden');
   });
@@ -33,6 +34,7 @@ $(function() {
       newTitle = $('#list-title').val();
       todoList.update(newTitle);
       $('#title').html(newTitle);
+      document.title = newTitle;
       $('#title').removeClass('hidden');
       return $('#list-title').addClass('hidden');
     }

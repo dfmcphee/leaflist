@@ -1,5 +1,7 @@
 describe "Library Tests", ->
   before ->
+    $.ajax = () ->
+      return true
 
   it "Should be able to add a new Todo", ->
     list = new List()

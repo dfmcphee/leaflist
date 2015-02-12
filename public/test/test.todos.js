@@ -1,5 +1,9 @@
 describe("Library Tests", function() {
-  before(function() {});
+  before(function() {
+    return $.ajax = function() {
+      return true;
+    };
+  });
   it("Should be able to add a new Todo", function() {
     var list, todo;
     list = new List();
