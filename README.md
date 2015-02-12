@@ -1,5 +1,7 @@
 # LeafList
-A very simple way to share todo lists. Includes both client and server. Built using Express.js, MongoDB, CoffeeScript, and Sass.
+A very simple way to share task lists. Built using Express.js, MongoDB, CoffeeScript, and Sass.
+
+[leaflist.herokuapp.com](https://leaflist.herokuapp.com)
 
 ## Getting Started
 Install [Node.js](http://nodejs.org)
