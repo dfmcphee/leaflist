@@ -1,0 +1,43 @@
+.title-bar {
+  @include display-flex;
+  @include flex-direction(row);
+  @include align-items(center);
+  @include justify-content(center);
+
+  #title, #list-title {
+    @include flex(10);
+  }
+
+  button {
+    @include flex(2);
+    text-align: center;
+    width: 25px;
+    height: 50px;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    img {
+      width: 25px;
+    }
+  }
+}
+
+#share {
+  background: $dark-gray;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  p {
+    color: $light-gray;
+    margin-bottom: 8px;
+  }
+}
+
+#list-url {
+  width: 97%;
+  margin-bottom: 1em;
+  color: $light-gray;
+  background: transparent;
+  border: solid 1px $light-gray;
+}

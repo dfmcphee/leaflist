@@ -182,6 +182,52 @@ img {
   height: 36px;
 }
 
+.title-bar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.title-bar #title, .title-bar #list-title {
+  -webkit-flex: 10;
+  flex: 10;
+}
+.title-bar button {
+  -webkit-flex: 2;
+  flex: 2;
+  text-align: center;
+  width: 25px;
+  height: 50px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.title-bar button img {
+  width: 25px;
+}
+
+#share {
+  background: #363942;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+#share p {
+  color: #c3c3c3;
+  margin-bottom: 8px;
+}
+
+#list-url {
+  width: 97%;
+  margin-bottom: 1em;
+  color: #c3c3c3;
+  background: transparent;
+  border: solid 1px #c3c3c3;
+}
+
 /**
 *  Buttons
 */

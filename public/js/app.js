@@ -11,6 +11,10 @@ $(function() {
     $('#create-list').removeClass('hidden');
   }
   $('#main').addClass('animated fadeIn');
+  $(document).on("click", "#link-button", function() {
+    $('#list-url').val(document.URL);
+    return $('#share').toggleClass('hidden');
+  });
   $(document).on("click", "#title", function() {
     if (todoList) {
       $('#title').addClass('hidden');

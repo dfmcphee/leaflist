@@ -27,8 +27,15 @@
         </ul>
       </nav>
       <div id="main" class="container">
-        <h1 id="title">Create a list to get started</h1>
-        <input id="list-title" type="text" class="hidden" placeholder="Enter a new title">
+        <div class="title-bar">
+          <h1 id="title">Create a list to get started</h1>
+          <input id="list-title" type="text" class="hidden" placeholder="Enter a new title">
+          <button id="link-button"><img src="/img/link.svg" /></button>
+        </div>
+        <div id="share" class="hidden">
+          <p>Copy this link to share with friends.</p>
+          <input id="list-url" type="text" readonly />
+        </div>
         <div id="create-list" class="toolbar hidden">
           <input id="new-list" type="text" placeholder="Enter a name for your list" />
           <button id="add-list" class="button">Add</button>
