@@ -104,7 +104,7 @@ class List
   #
   update: (title) ->
     @title = title
-    
+
     # Set url for request
     url = "/lists/update"
 
@@ -180,6 +180,7 @@ class List
     # Toggle toolbars
     $('#create-list').addClass('hidden')
     $('#create-todo').removeClass('hidden')
+    $('#link-button').removeClass('hidden')
     $('.nav-right').removeClass('hidden')
 
     main = $('#main')
@@ -187,6 +188,11 @@ class List
     main.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', ->
       main.removeClass('fadeIn')
     )
+
+    homescreenOptions =
+      maxDisplayCount: 0
+      icon: false
+    window.addToHomescreen(homescreenOptions)
 
     # Push state
     uri = new URI(window.location.href)

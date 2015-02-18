@@ -139,7 +139,7 @@ List = (function() {
   };
 
   List.prototype.render = function() {
-    var main, todo, uri, _i, _len, _ref;
+    var homescreenOptions, main, todo, uri, _i, _len, _ref;
     $('#title').html(this.title);
     document.title = this.title;
     $('#todo-list').empty();
@@ -150,12 +150,18 @@ List = (function() {
     }
     $('#create-list').addClass('hidden');
     $('#create-todo').removeClass('hidden');
+    $('#link-button').removeClass('hidden');
     $('.nav-right').removeClass('hidden');
     main = $('#main');
     main.addClass('animated fadeIn');
     main.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
       return main.removeClass('fadeIn');
     });
+    homescreenOptions = {
+      maxDisplayCount: 0,
+      icon: false
+    };
+    window.addToHomescreen(homescreenOptions);
     uri = new URI(window.location.href);
     uri.setQuery("list", this.id);
     window.history.pushState({

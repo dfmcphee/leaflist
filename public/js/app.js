@@ -13,7 +13,8 @@ $(function() {
   $('#main').addClass('animated fadeIn');
   $(document).on("click", "#link-button", function() {
     $('#list-url').val(document.URL);
-    return $('#share').toggleClass('hidden');
+    $('#share').toggleClass('fadeInDownBig');
+    return $('#share').toggleClass('animated');
   });
   $(document).on("click", "#title", function() {
     if (todoList) {

@@ -1,7 +1,8 @@
 /**
 *  Variables
 */
-$light-gray: #c3c3c3;
+$light-gray: #eee;
+$medium-gray: #90929B;
 $dark-gray: #363942;
 $light-orange: #FFD34E;
 $medium-orange: #DB9E36;
@@ -18,6 +19,8 @@ $mobile-max: 600px;
 @import 'base';
 @import 'layout';
 @import 'nav';
+
+@import 'vendor/addtohomescreen';
 
 @import 'modules/toolbar';
 @import 'modules/titlebar';

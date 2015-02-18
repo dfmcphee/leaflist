@@ -18,7 +18,8 @@ $ ->
   # Add event listener when link button is clicked
   $(document).on "click", "#link-button", ->
     $('#list-url').val(document.URL)
-    $('#share').toggleClass('hidden')
+    $('#share').toggleClass('fadeInDownBig')
+    $('#share').toggleClass('animated')
 
   # Add event listener when title is clicked
   $(document).on "click", "#title", ->

@@ -8,7 +8,7 @@
     @include flex(10);
   }
 
-  button {
+  #link-button {
     @include flex(2);
     text-align: center;
     width: 25px;
@@ -21,17 +21,53 @@
       width: 25px;
     }
   }
+
+  #link-button.active {
+    color: $light-gray;
+    top: 30px;
+  }
+
+  button:focus {
+    outline: 0;
+  }
+}
+
+#triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid rgba($green, 0.95);
+  position: absolute;
+  right: 50px;
+  top: -20px;
+  z-index: -1;
 }
 
 #share {
-  background: $dark-gray;
-  padding: 1em;
-  margin-bottom: 1em;
+  position: relative;
+  height: 0;
+  background: rgba($green, 0.95);
+  visibility: hidden;
+  animation-duration: 0.75s;
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  -ms-animation-duration: 0.75s;
+  animation-delay: 0s;
+  -webkit-animation-delay: 0s;
+  -moz-animation-delay: 0s;
+  -ms-animation-delay: 0s;
 
   p {
     color: $light-gray;
     margin-bottom: 8px;
   }
+}
+
+#share.animated {
+  height: auto;
+  padding: 1em;
+  margin-bottom: 1em;
 }
 
 #list-url {
